@@ -1,0 +1,150 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+html,
+body,
+#map {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: $content-ff;
+}
+
+input,
+select {
+    outline: 0;
+}
+
+.sidebar-container {
+    .menu-bar {
+        background: $primary-color;
+        width: em(60);
+        position: fixed;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        .logo {
+            padding: em(24) 0;
+            .opacity-circle {
+                width: em(36);
+                height: em(36);
+                background: rgba(255, 255, 255, .2);
+                border-radius: 50%;
+                position: relative;
+                margin: 0 auto;
+                .icon {
+                    @include absolute-center;
+                    font-size: em(16);
+                    color: $white;
+                }
+            }
+        }
+        .menu {
+            display: block;
+            position: relative;
+            ul {
+                list-style: none;
+                padding: 0;
+                text-align: center;
+                li {
+                    padding: em(10) 0;
+                    font-size: em(20);
+                    color: $white;
+                    transition: $default-transition;
+                    &:hover,
+                    &.active {
+                        background: $black-opacity;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    .menu-content {
+        width: em(310);
+        padding: em(30);
+        position: fixed;
+        top: 0;
+        left: em(-310);
+        background: $white;
+        height: 100vh;
+        z-index: 999;
+        box-shadow: 0 0 em(4) em(2) $black-opacity;
+        transition: $default-transition;
+        &.show {
+            left: em(60);
+        }
+        .title {
+            font-family: $title-ff;
+            font-size: em(20);
+            font-weight: bold;
+            margin-bottom: em(4);
+        }
+        .subtitle {
+            font-family: $title-ff;
+            font-size: em(12);
+            color: $gray;
+            margin-bottom: em(30);
+        }
+        .section {
+            margin: em(12) 0;
+            display: flex;
+            span {
+                width: 40%;
+                float: left;
+                font-size: em(13);
+                margin: em(4) 0;
+            }
+            .input-inline {
+                width: 60%;
+                float: left;
+                display: flex;
+                input[type=color] {
+                    width: 100%;
+                    border-radius: 0 em(4) em(4) 0;
+                    border: $input-border;
+                    background: $white;
+                    border-left: 0;
+                }
+                input[type=number] {
+                    width: 20%;
+                    -moz-appearance: textfield;
+                    border-radius: em(4) 0 0 em(4);
+                    border: $input-border;
+                    text-align: center;
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+                select {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+#map {
+    margin-left: em(60);
+    transition: $default-transition;
+    &.menu-open {
+        margin-left: em(430);
+    }
+}
+
+@media(max-width: 700px) {
+    .sidebar-container .menu-content {
+        width: 75%;
+        padding: em(12);
+        z-index: 99999;
+        &.show {
+            left: 0;
+        }
+    }
+    #map.menu-open {
+        margin-left: em(60);
+    }
+}
